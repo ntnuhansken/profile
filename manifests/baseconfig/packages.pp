@@ -8,6 +8,6 @@ class profile::baseconfig::packages {
   }
 
   ensure_packages($pkgs, {
-    ensure => 'present',
+    'ensure' => 'present',
   )}
-  }
+}
