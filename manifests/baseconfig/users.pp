@@ -10,9 +10,4 @@ class profile::baseconfig::users {
     ensure => present,
     gid    => 700,
   }
-  group { 'sysadmin':
-    ensure => present,
-    gid    => 701,
-  }
-
-
+}
