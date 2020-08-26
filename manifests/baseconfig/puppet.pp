@@ -1,7 +1,7 @@
 # Configure puppet
 class profile::baseconfig::puppet {
   $environment = lookup('profile::puppet::environment', String)
-  $puppetserver = lookup('profile:puppet::hostname', Stdlib::Fqdn)
+  $puppetserver = lookup('profile::puppet::hostname', Stdlib::Fqdn)
   $agentconfigfile = '/etc/puppetlabs/puppet/puppet.conf'
   $agentpackage = 'puppet-agent'
 
