@@ -1,6 +1,6 @@
 # Install a tftp server
 class profile::services::tftp {
-  $rootdir = '/var/lib/tftboot/'
+  $rootdir = '/var/lib/tftpboot/'
 
   class { '::tftp':
     directory => $rootdir,
