@@ -1,5 +1,6 @@
 # Install a tftp server
 class profile::services::tftp {
+  $tftpserver = lookup('profile::tftp::server', Stdlib::IP::Address::V4)
   $rootdir = '/var/lib/tftpboot/'
 
   file { $rootdir:
@@ -34,5 +35,12 @@ class profile::services::tftp {
     ensure  => 'file',
     source  => '/usr/lib/syslinux/modules/bios/ldlinux.c32',
     require => Package['syslinux'],
+  }
+
+  file { '/usr/local/bin/createtftp.sh':
+    ensure  => 'file',
+    owner   => 'root',
+    mode    => '0755',
+    content => template('profile/createtftp.erb'),
   }
 }

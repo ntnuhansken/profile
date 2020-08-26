@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ $# -ne 3 ]; then
+	echo "Usage $0: <hostname> <mac-address> <os-shortname>"
+	exit 1
+fi
+
+name=$1
+mac=$2
+os=$3
+
+realmac=$(echo $mac | sed 's/:/-/g')
+filename="01-${realmac}"
+tftpserver="<%= @tftpserver %>"
+
+cat <<EOF > /var/lib/tftpboot/pxelinux.cfg/$filename
+DEFAULT install
+LABEL install
+        KERNEL $os/linux
+        APPEND auto initrd=2004/initrd.gz url=tftp://$tftpserver/$os/preseed locale=en_US keyboard-configuration/layoutcode=no hostname=$name interface=auto -- quiet
+EOF
