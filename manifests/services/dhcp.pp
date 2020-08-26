@@ -15,7 +15,7 @@ class profile::services::dhcp {
     'merge'      => 'unique',
   })
 
-  $man_if = $facts['netowrking']['primary']
+  $man_if = $facts['networking']['primary']
   $mip = $facts['networking']['interfaces'][$man_if]['ip']
   $pxe_server = lookup('profile::dhcp::pxe::server', {
     'value_type'    => Stdlib::IP::Address::V4,
