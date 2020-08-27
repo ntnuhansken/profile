@@ -12,10 +12,15 @@ os=$3
 realmac=$(echo $mac | sed 's/:/-/g')
 filename="01-${realmac}"
 tftpserver="<%= @tftpserver %>"
+filepath="/var/lib/tftpboot/pxelinux.cfg/$filename"
 
-cat <<EOF > /var/lib/tftpboot/pxelinux.cfg/$filename
+cat <<EOF > $filepath
 DEFAULT install
 LABEL install
         KERNEL $os/linux
         APPEND auto initrd=$os/initrd.gz url=tftp://$tftpserver/$os/preseed locale=en_US keyboard-configuration/layoutcode=no hostname=$name interface=auto -- quiet
 EOF
+
+chown tftp:tftp $filepath
+chmod 666 $filepath
+
