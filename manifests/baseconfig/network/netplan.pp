@@ -16,7 +16,7 @@ class profile::baseconfig::network::netplan (Hash $nics) {
     }
     elsif($method == 'manual') {
       $manual = { 'dhcp4' => false }
-      $memo + { $nic => $dhcp }
+      $memo + { $nic => $manual }
     }
     else {
       if($nics[$nic]['ipv4']['address']) {
