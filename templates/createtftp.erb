@@ -8,9 +8,9 @@ fi
 name=$1
 mac="${2,,}" # Magisk innebygget tolower-triks
 os=$3
+nic=$4
 
 if [ ! -z $5 ] && [ $5 == 'kvm' ]; then
-  nic=$4
   kvm=$5
 elif [ ! -z $5 ] && [ $5 != 'kvm' ]; then
 	echo "The fourth argument is supposed to be 'kvm' or non-existing"
