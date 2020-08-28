@@ -1,13 +1,22 @@
 #!/bin/bash
 
-if [ $# -ne 3 ]; then
-	echo "Usage $0: <hostname> <mac-address> <os-shortname>"
+if [ $# -lt 3 ] || [ $# -gt 4 ]; then
+	echo "Usage $0: <hostname> <mac-address> <os-shortname> [kvm]"
 	exit 1
 fi
 
 name=$1
 mac=$2
 os=$3
+
+if [ ! -z $4 ] && [ $4 == 'kvm' ]; then
+	kvm=$4
+elif [ ! -z $4 ] && [ $4 != 'kvm' ]; then
+	echo "The fourth argument is supposed to be 'kvm' or non-existing"
+	exit 1
+else
+	kvm=''
+fi
 
 realmac=$(echo $mac | sed 's/:/-/g')
 filename="01-${realmac}"
@@ -18,7 +27,7 @@ cat <<EOF > $filepath
 DEFAULT install
 LABEL install
         KERNEL $os/linux
-        APPEND auto initrd=$os/initrd.gz url=tftp://$tftpserver/$os/preseed locale=en_US keyboard-configuration/layoutcode=no hostname=$name interface=auto -- quiet
+        APPEND auto initrd=$os/initrd.gz url=tftp://$tftpserver/$os/preseed$kvm locale=en_US keyboard-configuration/layoutcode=no hostname=$name interface=auto -- quiet
 EOF
 
 chown tftp:tftp $filepath
