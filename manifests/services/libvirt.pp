@@ -10,10 +10,10 @@ class profile::services::libvirt {
     $networks = $nets.reduce({}) | $memo, $n | {
       $netname = $n[0]
       $dev = $nets[$netname]['bridge']
-      $memo + {
+      $memo + { $netname => {
         'bridge'      => $netname,
         'forward_dev' => $dev,
-      }
+      } }
     }
   } else {
     $networks = {}
