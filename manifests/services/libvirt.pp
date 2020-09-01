@@ -11,8 +11,7 @@ class profile::services::libvirt {
       $netname = $n[0]
       $dev = $nets[$netname]['bridge']
       $memo + { $netname => {
-        'bridge'      => $netname,
-        'forward_dev' => $dev,
+        'bridge' => $dev,
       } }
     }
   } else {
