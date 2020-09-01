@@ -6,6 +6,10 @@ class profile::baseconfig::network::netplan (Hash $nics) {
   $dns_search = lookup('profile::dns::searchdomain', {
     'default_value' => undef,
   })
+  $bridge_conf = lookup('profile::baseconfig::network::bridges', {
+    'default_value' => false,
+    'value_tye'     => Variant[Hash, Boolean],
+  })
 
   $ethernets = $nics.reduce({}) | $memo, $n | {
     $nic = $n[0]
@@ -40,7 +44,23 @@ class profile::baseconfig::network::netplan (Hash $nics) {
     }
   }
 
+  if($bridge_conf) {
+    $bridges = $bridge_conf.reduce({}) | $m, $b | {
+      $bridge = $b[0]
+      $interfaces = $bridge_conf[$bridge]['interfaces']
+      $m + { $bridge => {
+        'interfaces'    => $interfaces,
+        'stp'           => false,
+        'forward_delay' => 0,
+      },
+      }
+    }
+  } else {
+    $bridges = undef
+  }
+
   class { '::netplan':
     ethernets => $ethernets,
+    bridges   => $bridges,
   }
 }
