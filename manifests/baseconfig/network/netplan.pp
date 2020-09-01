@@ -48,10 +48,13 @@ class profile::baseconfig::network::netplan (Hash $nics) {
     $bridges = $bridge_conf.reduce({}) | $m, $b | {
       $bridge = $b[0]
       $interfaces = $bridge_conf[$bridge]['interfaces']
-      $m + { $bridge => {
-        'interfaces'    => $interfaces,
+      $param = {
         'stp'           => false,
         'forward_delay' => 0,
+      }
+      $m + { $bridge => {
+        'interfaces' => $interfaces,
+        'param'      => $param,
       },
       }
     }
