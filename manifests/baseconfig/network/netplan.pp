@@ -8,7 +8,7 @@ class profile::baseconfig::network::netplan (Hash $nics) {
   })
   $bridge_conf = lookup('profile::baseconfig::network::bridges', {
     'default_value' => false,
-    'value_tye'     => Variant[Hash, Boolean],
+    'value_type'     => Variant[Hash, Boolean],
   })
 
   $ethernets = $nics.reduce({}) | $memo, $n | {
