@@ -31,7 +31,7 @@ class profile::services::dhcp {
     'merge'      => 'unique',
   })
 
-  include ::profile::baseconfig::dhcp::firewall
+  include ::profile::services::dhcp::firewall
 
   class { '::dhcp':
     dnssearchdomains => [$searchdomain],
