@@ -9,7 +9,7 @@ define profile::baseconfig::firewall::global (
   firewall { "5 Accept service ${name} from ${net}":
     proto   => $protocol,
     dport   => $port,
-    acction => 'accept',
+    action => 'accept',
     source  => $net,
   }
 }

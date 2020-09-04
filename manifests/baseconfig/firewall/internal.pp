@@ -12,7 +12,7 @@ define profile::baseconfig::firewall::internal (
     firewall { "5 Accept service ${name} from ${net}":
       proto   => $protocol,
       dport   => $port,
-      acction => 'accept',
+      action => 'accept',
       source  => $net,
     }
   }
