@@ -1,6 +1,6 @@
 # Firewall rules for DHCP
 class profile::services::dhcp::firewall {
-  ::profile::baseconfig::firwall::global { 'DHCP':
+  ::profile::baseconfig::firewall::global { 'DHCP':
     protocol => 'udp',
     port     => [67,68],
   }
