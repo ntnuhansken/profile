@@ -3,6 +3,8 @@ class profile::services::tftp {
   $tftpserver = lookup('profile::tftp::server', Stdlib::IP::Address::V4)
   $rootdir = '/var/lib/tftpboot/'
 
+  include ::profile::services::tftp::firewall
+
   file { $rootdir:
     ensure => 'directory',
   }
