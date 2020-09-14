@@ -3,7 +3,7 @@ class profile::services::munin::node::firewall {
   $muninservers = lookup('profile::munin::servers')
 
   $muninserverscidr = $muninservers.map | $server | {
-    $server + '/32'
+    "${server}/32"
   }
 
   ::profile::baseconfig::firewall::custom { 'munin':
