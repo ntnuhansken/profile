@@ -1,6 +1,6 @@
 # Firewall rules for munin node
 class profile::services::munin::node::firewall {
-  $muninservers = lookup('profile::munin::server')
+  $muninservers = lookup('profile::munin::servers')
 
   ::profile::baseconfig::firewall::custom { 'munin':
     source   => $muninservers,
