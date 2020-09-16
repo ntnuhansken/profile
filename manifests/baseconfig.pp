@@ -6,6 +6,10 @@ class profile::baseconfig {
     'default_value' => true,
     'value_type'    => Boolean,
   })
+  $installzabbix = lookup('profile::zabbix::install', {
+    'default_value' => true,
+    'value_type'    => Boolean,
+  })
 
   include ::profile::baseconfig::firewall
   include ::profile::baseconfig::networking
@@ -16,5 +20,9 @@ class profile::baseconfig {
 
   if ($installmunin) {
     include ::profile::services::munin::node
+  }
+
+  if ($installzabbix) {
+    incliude ::profile::services::zabbix::agent
   }
 }
