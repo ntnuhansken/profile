@@ -23,6 +23,6 @@ class profile::baseconfig {
   }
 
   if ($installzabbix) {
-    incliude ::profile::services::zabbix::agent
+    include ::profile::services::zabbix::agent
   }
 }
