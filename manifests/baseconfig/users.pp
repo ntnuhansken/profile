@@ -5,6 +5,8 @@ class profile::baseconfig::users {
     'default_value' => false
   })
 
+  include ::profile::baseconfig::deployment
+
   group { 'users':
     ensure => present,
     gid    => 700,
