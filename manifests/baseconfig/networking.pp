@@ -8,7 +8,7 @@ class profile::baseconfig::networking {
   })
   if($if_to_configure) {
     $distro = $facts['os']['release']['major']
-    if(versioncmp($distro, '16.04') >= 0) {
+    if(versioncmp($distro, '16.04') > 0) {
       class { '::profile::baseconfig::network::netplan':
         nics => $if_to_configure,
       }
