@@ -7,6 +7,8 @@ class profile::baseconfig::network::ifupdown (Hash $nics) {
     'default_value' => undef,
   })
 
+  $dns_search_real = join($dns_search, ' ')
+
   $nics.each | $nic, $params | {
     $v4gateway = $params['ipv4']['gateway']
     $method = $params['ipv4']['method']
@@ -30,7 +32,7 @@ class profile::baseconfig::network::ifupdown (Hash $nics) {
         netmask         => $v4netmask,
         gateway         => $v4gateway,
         dns_nameservers => $dns_servers,
-        dns_search      => $dns_search,
+        dns_search      => $dns_search_real,
       }
     }
   }

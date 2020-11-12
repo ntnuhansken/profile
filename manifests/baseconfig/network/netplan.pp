@@ -37,7 +37,7 @@ class profile::baseconfig::network::netplan (Hash $nics) {
         'gateway4'       => $gateway,
         'nameservers'    => {
           'addresses' => split($dns_servers, ' '),
-          'search'    => [ $dns_search ],
+          'search'    => $dns_search,
         },
       }
       }
